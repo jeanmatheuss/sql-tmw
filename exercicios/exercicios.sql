@@ -51,4 +51,5 @@ SELECT *,
 		END as Grupos
 
 
-FROM transacoes;
+FROM transacoes
+LIMIT 10;
