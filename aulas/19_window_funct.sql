@@ -1,3 +1,4 @@
+-- transações acumuladas
 WITH tb_cliente_dia as (
     SELECT IdCliente,
             substr(DtCriacao, 1,10) as dtDia,

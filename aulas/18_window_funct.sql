@@ -1,3 +1,4 @@
+-- Transações acumuladas
 WITH tb_sumario_dias as (
 
 SELECT substr(DtCriacao, 1,10) as dtDia,

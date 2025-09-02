@@ -1,0 +1,4 @@
+--Qual o dia da semana mais ativo de cada usuário?
+-- 1: contagem de transações por usuário
+-- 2: dia da semana
+-- 3: 
