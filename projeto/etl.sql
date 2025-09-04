@@ -1,16 +1,16 @@
 --Dias desde a última transação
-CREATE TABLE feature_store_cliente AS
+
 WITH tb_transacoes as (
 
     SELECT IdTransacao,
         IdCliente,
         QtdePontos,
         datetime(substr(DtCriacao,1,10)) as dtCriacao,
-        julianday('now') - julianday(substr(DtCriacao,1,10)) as diffDate,
+        julianday('{date}') - julianday(substr(DtCriacao,1,10)) as diffDate,
         CAST(strftime('%H', substr(DtCriacao,1,19)) AS INTEGER) AS dtHora
 
     FROM transacoes
-    WHERE DtCriacao < '2025-07-01'
+    WHERE DtCriacao < '{date}'
 ),
 
 --Idade na base
@@ -19,7 +19,7 @@ tb_cliente as (
 
     SELECT IdCliente,
             datetime(substr(DtCriacao,1,19)) as DtCriacao,
-            julianday('now') - julianday(substr(DtCriacao,1,10)) as idadeBase
+            julianday('{date}') - julianday(substr(DtCriacao,1,10)) as idadeBase
 
     FROM clientes
 
@@ -186,8 +186,10 @@ tb_join as (
 
 )
 
+INSERT INTO feature_store_cliente
+
 SELECT 
-        '2025-07-01' AS dtRef,
+        '{date}' AS dtRef,
         *,
         1.* qtdTransacoes28d / qtdeTransacoesVida AS engajamento28Vida
 FROM tb_join
